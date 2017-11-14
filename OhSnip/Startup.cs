@@ -50,7 +50,7 @@ namespace OhSnip
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Snippet/Error");
             }
 
             app.UseStaticFiles();
@@ -61,7 +61,7 @@ namespace OhSnip
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Snippet}/{action=Index}/{id?}");
             });
         }
     }

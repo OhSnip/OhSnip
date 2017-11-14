@@ -8,7 +8,7 @@ using OhSnip.Models;
 
 namespace OhSnip.Controllers
 {
-    public class HomeController : Controller
+    public class SnippetController : Controller
     {
         public IActionResult Index()
         {
