@@ -8,12 +8,14 @@ using OhSnip.Models;
 
 namespace OhSnip.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class OhSnipContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public OhSnipContext(DbContextOptions<OhSnipContext> options)
             : base(options)
         {
         }
+
+        public DbSet<Snippet> Snippets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
