@@ -9,7 +9,9 @@ namespace OhSnip.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        public int UserId { get; set; }
+        // TODO: Look at adding a numerical auto-incrementing Id to associate 
+        // users and snippets.
+        // public int UserId { get; set; }   
         public List<Snippet> Snippets { get; set; }
 
         public ApplicationUser()
