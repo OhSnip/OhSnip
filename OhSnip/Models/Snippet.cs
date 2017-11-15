@@ -12,7 +12,7 @@ namespace OhSnip.Models
         public string Description { get; set; }
         public string Language { get; set; }
         public string Code { get; set; }
-        public int UserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public ApplicationUser User { get; set; }
     }
 }
