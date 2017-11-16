@@ -4,16 +4,22 @@
 }
 
 <script>
+    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+        document.getElementById("openButton").style.visibility = "hidden";
     }
 
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+        document.getElementById("openButton").style.visibility = "visible";
     }
 </script>
 
-<h2>Welcome!</h2>
+
 <nav id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="">C</a>
@@ -39,28 +45,28 @@
     <a href="">Visual Basic</a>
     <a href="">XML</a>
 </nav>
-<style>
-    [class*="col-"] {
-        background-color: lightblue;
-        border: 1px solid blue;
-    }
-</style>
-<form asp-controller="Snippet" asp-action="Dashboard" method="post">
-    <div class="input-group col-xs-12 col-md-6">
-        <input type="text" class="form-control" placeholder="Search" />
-        <div class="input-group-btn">
-            <button type="submit" class="btn btn-default">
-                <i class="glyphicon glyphicon-search"></i> 
-            </button>
-        </div>
-    </div>
-</form>
 
-<div>
-    <h3>Snippet Title</h3>
-    <p>Description</p>
-    <button type="button">Edit</button>
-    <button type="button">Copy</button>
+<span id="openButton" onclick="openNav()"><i class="glyphicon glyphicon-ice-lolly-tasted"></i>Languages</span>
+<div id="main" class="main">
+    <h2>Welcome!</h2>
+
+    <form asp-controller="Snippet" asp-action="Dashboard" method="post">
+        <div class="input-group col-xs-12 col-md-6">
+            <input type="text" class="form-control" placeholder="Search" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-default">
+                    <i class="glyphicon glyphicon-search"></i> 
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <h3>Snippet Title</h3>
+        <p>Description</p>
+        <button type="button">Edit</button>
+        <button type="button">Copy</button>
+    </div>
 </div>
 
 
