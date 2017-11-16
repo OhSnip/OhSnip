@@ -29,9 +29,31 @@ namespace OhSnip.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("Dashboard")]
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Route("AddSnippet")]
+        public IActionResult AddSnippet()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Route("EditSnippet")]
+        public IActionResult EditSnippet()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
