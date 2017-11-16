@@ -8,12 +8,14 @@ using OhSnip.Models;
 
 namespace OhSnip.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class OhSnipContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public OhSnipContext(DbContextOptions<OhSnipContext> options)
             : base(options)
         {
         }
+
+        public DbSet<Snippet> Snippets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -21,6 +23,7 @@ namespace OhSnip.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            builder.Entity<Snippet>().ToTable("Snippet");
         }
     }
 }
