@@ -7,5 +7,7 @@ namespace OhSnip.Models.AccountViewModels
 {
     public class LoginRegisterViewModel
     {
+        public RegisterViewModel Register { get; set; }
+        public LoginViewModel Login { get; set; }
     }
 }
