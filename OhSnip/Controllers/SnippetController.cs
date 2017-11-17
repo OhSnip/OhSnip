@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OhSnip.Models;
+using OhSnip.Models.SnippetViewModels;
 
 namespace OhSnip.Controllers
 {
@@ -38,16 +39,18 @@ namespace OhSnip.Controllers
 
         [HttpGet]
         [Route("AddSnippet")]
-        public IActionResult AddSnippet()
+        public IActionResult ShowAddSnippet()
         {
-            return View();
+            DetailViewModel model = new DetailViewModel();
+            return View("AddSnippet", model);
         }
 
         [HttpGet]
         [Route("EditSnippet")]
-        public IActionResult EditSnippet()
+        public IActionResult ShowEditSnippet()
         {
-            return View();
+            DetailViewModel model = new DetailViewModel();
+            return View("EditSnippet", model);
         }
 
         public IActionResult Error()
