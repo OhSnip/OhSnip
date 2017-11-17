@@ -1,10 +1,10 @@
-﻿@model OhSnip.Models.DetailViewModel
+﻿@model OhSnip.Models.SnippetViewModels.DetailViewModel
 
 @{
-    ViewData["Title"] = "AddSnippet";
+    ViewData["Title"] = "Add Snippet";
 }
 
-<h2>AddSnippet</h2>
+<h2>Add Snippet</h2>
 
 <form asp-controller="Snippet" asp-action="AddSnippet" method="post">
     <label asp-for="Title">Title</label>
