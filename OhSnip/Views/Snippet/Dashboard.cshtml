@@ -69,5 +69,24 @@
     </div>
 </div>
 
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Code</th>
+        
+    </tr>
 
+    @foreach (var snip in @ViewBag.allsnippets)
+    {
+        <tr>
+            <td>@snip.SnippetId</td>
+            <td>@snip.Title</td>
+            <td>@snip.Code</td>
+            <td><a href="/EditSnippet/@snip.SnippetId">Edit</a></td>
+            <td><a href="/DeleteSnippet/@snip.SnippetId">Delete</a></td>
+
+        </tr>
+    }
+</table>
 

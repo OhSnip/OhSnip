@@ -1,0 +1,16 @@
+﻿@model OhSnip.Models.SnippetViewModels.DetailViewModel
+
+@{
+    ViewData["Title"] = "Delete Snippet";
+}
+
+<h2>Delete Snippet</h2>
+
+@foreach (var snip in @ViewBag.sniptodelete)
+{
+    <p>"@snip.Title"</p>
+    <p>"@snip.Description"</p>
+    <p>"@snip.Code"</p>
+    <p>@snip.SnippetId</p>
+    <a href="/Delete/@snip.SnippetId">Delete</a>
+}
