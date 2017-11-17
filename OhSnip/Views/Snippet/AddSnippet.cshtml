@@ -13,6 +13,8 @@
     <input asp-for="Description" />
     <select asp-for="Language" asp-items="Model.Languages"></select>
     <textarea asp-for="Code" placeholder="Add new code or snippet here."></textarea>
+    <label asp-for="Link">Source</label>
+    <input asp-for="Link" />
     <button type="submit">Add Snippet</button>
 </form>
 

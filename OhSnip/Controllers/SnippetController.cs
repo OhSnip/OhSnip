@@ -53,7 +53,7 @@ namespace OhSnip.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SnippetId,Title,Description,Language,Code,ApplicationUserId")] Snippet snippet)
+        public async Task<IActionResult> Create([Bind("SnippetId,Title,Description,Language,Code,Link,ApplicationUserId")] Snippet snippet)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace OhSnip.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("SnippetId,Title,Description,Language,Code,ApplicationUserId")] Snippet snippet)
+        public async Task<IActionResult> Edit(int id, [Bind("SnippetId,Title,Description,Language,Code,Link,ApplicationUserId")] Snippet snippet)
         {
             if (ModelState.IsValid)
             {
