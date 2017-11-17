@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace OhSnip.Models.SnippetViewModels
 {
     public class DetailViewModel
     {
+        [Required]
+        [StringLength(30, MinimumLength = 1)]
         public string Title { get; set; }
+        [Required]
+        [StringLength(255)]
         public string Description { get; set; }
+        [Required]
         public string Language { get; set; }
+        [Required]
+        [StringLength(2000, MinimumLength = 2)]
         public string Code { get; set; }
 
         public List<SelectListItem> Languages { get; } = new List<SelectListItem>
