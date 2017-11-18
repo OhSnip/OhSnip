@@ -1,8 +1,4 @@
-﻿@using System.Collections.Generic
-@using System.Linq
-@using Microsoft.AspNetCore.Http
-@using Microsoft.AspNetCore.Http.Authentication
-@inject SignInManager<ApplicationUser> SignInManager
+﻿@using OhSnip.Models
 
 @{
     ViewData["Title"] = "Log in";
@@ -13,7 +9,8 @@
     <div class="col-md-4">
         @Html.Partial("LoginPartial")
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    <h2>Registration</h2>
+    <div>
         @Html.Partial("RegisterPartial")
     </div>
 </div>

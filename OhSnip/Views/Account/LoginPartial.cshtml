@@ -1,8 +1,8 @@
-﻿@model OhSnip.Models.AccountViewModels.LoginViewModel
+﻿@model LoginViewModel
 @inject SignInManager<ApplicationUser> SignInManager
 
 <section>
-    <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+    <form asp-controller="Account" asp-action="Login" method="post">
         <h4>Use a local account to log in.</h4>
         <hr />
         <div asp-validation-summary="All" class="text-danger"></div>
