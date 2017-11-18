@@ -65,7 +65,7 @@ namespace OhSnip.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Dashboard", "Snippet");
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -232,7 +232,7 @@ namespace OhSnip.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Dashboard", "Snippet");
                 }
                 AddErrors(result);
             }
@@ -247,7 +247,7 @@ namespace OhSnip.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(SnippetController.Index), "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpPost]

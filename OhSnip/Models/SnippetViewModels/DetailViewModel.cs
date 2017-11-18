@@ -22,6 +22,7 @@ namespace OhSnip.Models.SnippetViewModels
         public string Code { get; set; }
         [Required]
         [StringLength(255)]
+        [Display(Name = "Source")]
         public string Link { get; set; }
 
         public List<SelectListItem> Languages { get; } = new List<SelectListItem>

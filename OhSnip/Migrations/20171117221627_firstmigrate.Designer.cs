@@ -8,12 +8,13 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using OhSnip.Data;
 using System;
 
-namespace OhSnip.Data.Migrations
+namespace OhSnip.Migrations
 {
     [DbContext(typeof(OhSnipContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171117221627_firstmigrate")]
+    partial class firstmigrate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,6 +185,8 @@ namespace OhSnip.Data.Migrations
                     b.Property<int>("SnippetId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<string>("Code");
 
                     b.Property<DateTime>("CreatedAt");
@@ -192,17 +195,15 @@ namespace OhSnip.Data.Migrations
 
                     b.Property<string>("Language");
 
+                    b.Property<string>("Link");
+
                     b.Property<string>("Title");
 
                     b.Property<DateTime>("UpdatedAt");
 
-                    b.Property<int?>("UserId");
-
-                    b.Property<string>("UserId1");
-
                     b.HasKey("SnippetId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Snippet");
                 });
@@ -256,7 +257,7 @@ namespace OhSnip.Data.Migrations
                 {
                     b.HasOne("OhSnip.Models.ApplicationUser", "User")
                         .WithMany("Snippets")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("ApplicationUserId");
                 });
 #pragma warning restore 612, 618
         }
