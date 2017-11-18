@@ -27,12 +27,6 @@ namespace OhSnip.Controllers
             return View();
         }
 
-        //// GET: Snippets
-        //public async Task<IActionResult> Dashboard()
-        //{
-        //    return View(await _context.Snippets.ToListAsync());
-        //}
-
         [HttpGet]
         [Route("Dashboard")]
         public IActionResult Dashboard()
@@ -50,21 +44,44 @@ namespace OhSnip.Controllers
             DetailViewModel model = new DetailViewModel();
             return View("AddSnippet", model);
         }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SnippetId,Title,Description,Language,Code,Link,ApplicationUserId")] Snippet snippet)
+        [Route("Create")]
+        public IActionResult Create(DetailViewModel snip)
         {
+            //check if post form is valid and then add new idea information to database
             if (ModelState.IsValid)
             {
-                _context.Add(snippet);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Dashboard));
-            }
-            return View(snippet);
-        }
+                Snippet newSnip = new Snippet
+                {
+                    Title = snip.Title,
+                    Description = snip.Description,
+                    Language = snip.Language,
+                    Code = snip.Code,
+                    Link = snip.Link,
+                    ApplicationUserId = "10",
+                };
+                _context.Snippets.Add(newSnip);
+                _context.SaveChanges();
+                return RedirectToAction("Dashboard");
 
-        [HttpGet]
+            }
+            return View("AddSnippet", snip);
+        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("SnippetId,Title,Description,Language,Code,Link,ApplicationUserId")] Snippet snippet)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(snippet);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Dashboard));
+        //    }
+        //    return View("AddSnippet", snippet);
+        //}
+                   
+
+    [HttpGet]
         [Route("EditSnippet/{id}")]
         public IActionResult ShowEditSnippet(int id)
         {

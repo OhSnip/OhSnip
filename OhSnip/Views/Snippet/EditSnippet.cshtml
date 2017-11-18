@@ -14,12 +14,13 @@
         <label asp-for="Description">Description</label>
         <input asp-for="Description" value="@snip.Description"/>
         <select asp-for="Language" asp-items="Model.Languages"></select>
-        <textarea asp-for="Code" value="@snip.Code"></textarea>
+        <textarea asp-for="Code">any thing</textarea>
         <input type="hidden" name="SnippetId" value="@snip.SnippetId" />
         <label asp-for="Link">Source</label>
         <input asp-for="Link" value="@snip.Link" />
         <button type="submit">Edit Snippet</button>
     </form>
+    <p>code @snip.Code</p>
 }
 
 
