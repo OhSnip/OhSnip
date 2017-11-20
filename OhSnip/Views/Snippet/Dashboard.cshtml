@@ -1,4 +1,9 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using OhSnip.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = "Dashboard";
 }
@@ -61,14 +66,21 @@
         </div>
     </form>
     <a class="button" type="button" href="/AddSnippet">Add New</a>
-    @foreach (var snip in @ViewBag.allsnippets)
-    {
-        <div>
-            <h3>@snip.Title</h3>
-            <p>@snip.Description</p>
-            <p>@snip.Code</p>
-            <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
-            <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
-        </div>
+
+    @{    
+        foreach(var snip in @ViewBag.allsnippets)
+        {
+            if(snip.ApplicationUserId == UserManager.GetUserId(User))
+            {
+                    <div>
+                        <h3>@snip.Title</h3>
+                        <p>@snip.Description</p>
+                        <p>@snip.Code</p>
+                        <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
+                        <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
+                    </div>
+            }
+        }
     }
+
 </div>
