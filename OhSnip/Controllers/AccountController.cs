@@ -79,12 +79,13 @@ namespace OhSnip.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
+                    return View();
                 }
             }
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View();
         }
 
         [HttpGet]
