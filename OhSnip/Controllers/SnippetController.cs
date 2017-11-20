@@ -4,6 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
+
 using OhSnip.Models.SnippetViewModels;
 using OhSnip.Models;
 using OhSnip.Data;
@@ -14,13 +18,14 @@ namespace OhSnip.Controllers
 {
     public class SnippetController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly OhSnipContext _context;
 
-        public SnippetController(OhSnipContext context)
+        public SnippetController(OhSnipContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
-
 
         public IActionResult Index()
         {
@@ -29,8 +34,15 @@ namespace OhSnip.Controllers
 
         [HttpGet]
         [Route("Dashboard")]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "You must login before viewing that page!";
+                return RedirectToAction("Login", "Account");
+            }
+
             List<Snippet> allsnippets = _context.Snippets.ToList();
             ViewBag.allsnippets = allsnippets;
 
@@ -39,16 +51,24 @@ namespace OhSnip.Controllers
 
         [HttpGet]
         [Route("AddSnippet")]
-        public IActionResult ShowAddSnippet()
+        public async Task<IActionResult> ShowAddSnippet()
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "You must login before viewing that page!";
+                return RedirectToAction("Login", "Account");
+            }
+
             DetailViewModel model = new DetailViewModel();
             return View("AddSnippet", model);
         }
         [HttpPost]
         [Route("Create")]
-        public IActionResult Create(DetailViewModel snip)
+        public async Task<IActionResult> Create(DetailViewModel snip)
         {
-            //check if post form is valid and then add new idea information to database
+            var user = await _userManager.GetUserAsync(User);
+
             if (ModelState.IsValid)
             {
                 Snippet newSnip = new Snippet
@@ -58,7 +78,7 @@ namespace OhSnip.Controllers
                     Language = snip.Language,
                     Code = snip.Code,
                     Link = snip.Link,
-                    ApplicationUserId = "10",
+                    ApplicationUserId = user.Id,
                 };
                 _context.Snippets.Add(newSnip);
                 _context.SaveChanges();
@@ -83,8 +103,15 @@ namespace OhSnip.Controllers
 
     [HttpGet]
         [Route("EditSnippet/{id}")]
-        public IActionResult ShowEditSnippet(int id)
+        public async Task<IActionResult> ShowEditSnippet(int id)
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "You must login before viewing that page!";
+                return RedirectToAction("Login", "Account");
+            }
+
             DetailViewModel model = new DetailViewModel();
             ViewBag.snippettoedit = _context.Snippets.Where(snip => snip.SnippetId == id);
             return View("EditSnippet", model);
@@ -105,8 +132,15 @@ namespace OhSnip.Controllers
 
         [HttpGet]
         [Route("DeleteSnippet/{id}")]
-        public IActionResult DeleteSnippet(int id)
+        public async Task<IActionResult> DeleteSnippet(int id)
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "You must login before viewing that page!";
+                return RedirectToAction("Login", "Account");
+            }
+
             ViewBag.sniptodelete = _context.Snippets.Where(snip => snip.SnippetId == id);
             return View();
         }
