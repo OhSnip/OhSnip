@@ -75,9 +75,11 @@
                     <div>
                         <h3>@snip.Title</h3>
                         <p>@snip.Description</p>
-                        <p>@snip.Code</p>
-                        <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
-                        <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
+                        <div>
+                            <p>@snip.Code</p>
+                            <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
+                            <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
+                        </div>
                     </div>
             }
         }
