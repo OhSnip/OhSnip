@@ -43,10 +43,16 @@ namespace OhSnip.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            List<Snippet> allsnippets = _context.Snippets.ToList();
-            ViewBag.allsnippets = allsnippets;
+            List<Snippet> allsnippets = _context
+                .Snippets
+                .Where(item => user.Id == item.ApplicationUserId)
+                .ToList();
+            DashboardViewModel displaySnippets = new DashboardViewModel()
+            {
+                Snippets = allsnippets
+            };
 
-            return View();
+            return View(displaySnippets);
         }
 
         [HttpGet]
@@ -158,15 +164,21 @@ namespace OhSnip.Controllers
 
         [HttpPost]
         [Route("Search")]
-        public IActionResult Search(string searchString)
+        public async Task<IActionResult> Search(string searchString)
         {
-            ViewBag.searchsnippets = _context
+            var user = await _userManager.GetUserAsync(User);
+            DashboardViewModel searchSnippets = new DashboardViewModel()
+            {
+            Snippets = _context
                 .Snippets
                 .Where(item => item.Code.Contains(searchString)
                     || item.Description.Contains(searchString)
                     || item.Title.Contains(searchString)
-                    );
-            return View("Dashboard");
+                    )
+                .Where(item => user.Id == item.ApplicationUserId)
+                .ToList()
+            };
+            return View("Dashboard", searchSnippets);
         }
         
 
