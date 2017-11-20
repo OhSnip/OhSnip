@@ -50,9 +50,9 @@
 <div id="main" class="main">
     <h2>Welcome!</h2>
 
-    <form asp-controller="Snippet" asp-action="Dashboard" method="post">
+    <form asp-controller="Snippet" asp-action="Search" method="post">
         <div class="input-group col-xs-12 col-md-6">
-            <input type="text" class="form-control" placeholder="Search" />
+            <input type="text" class="form-control" name="searchString" placeholder="Search" />
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-default">
                     <i class="glyphicon glyphicon-search"></i> 
@@ -77,18 +77,33 @@
         <th>Code</th>
         
     </tr>
-
-    @foreach (var snip in @ViewBag.allsnippets)
+    @if (ViewBag.allsnippets != null)
     {
-        <tr>
-            <td>@snip.SnippetId</td>
-            <td>@snip.Title</td>
-            <td>@snip.Code</td>
-            <td>@snip.Link</td>
-            <td><a href="/EditSnippet/@snip.SnippetId">Edit</a></td>
-            <td><a href="/DeleteSnippet/@snip.SnippetId">Delete</a></td>
-
-        </tr>
+        foreach (var snip in @ViewBag.allsnippets)
+        {
+            <tr>
+                <td>@snip.SnippetId</td>
+                <td>@snip.Title</td>
+                <td>@snip.Code</td>
+                <td>@snip.Link</td>
+                <td><a href="/EditSnippet/@snip.SnippetId">Edit</a></td>
+                <td><a href="/DeleteSnippet/@snip.SnippetId">Delete</a></td>
+            </tr>
+        }
+    }
+    else if (ViewBag.searchsnippets != null)
+    {
+        foreach (var snip in ViewBag.searchsnippets)
+        {
+            <tr>
+                <td>@snip.SnippetId</td>
+                <td>@snip.Title</td>
+                <td>@snip.Code</td>
+                <td>@snip.Link</td>
+                <td><a href="/EditSnippet/@snip.SnippetId">Edit</a></td>
+                <td><a href="/DeleteSnippet/@snip.SnippetId">Delete</a></td>
+            </tr>
+        }
     }
 </table>
 
