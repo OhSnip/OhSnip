@@ -46,7 +46,7 @@
     <a href="">XML</a>
 </nav>
 
-<span id="openButton" onclick="openNav()"><i class="glyphicon glyphicon-ice-lolly-tasted"></i>Languages</span>
+<span id="openButton" onclick="openNav()">Choose Language</span>
 <div id="main" class="main">
     <h2>Welcome!</h2>
 
@@ -60,35 +60,15 @@
             </div>
         </div>
     </form>
-    <a href="/AddSnippet">Add new!</a>
-
-    <div>
-        <h3>Snippet Title</h3>
-        <p>Description</p>
-        <button type="button">Edit</button>
-        <button type="button">Copy</button>
-    </div>
-</div>
-
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Code</th>
-        
-    </tr>
-
+    <a class="button" type="button" href="/AddSnippet">Add New</a>
     @foreach (var snip in @ViewBag.allsnippets)
     {
-        <tr>
-            <td>@snip.SnippetId</td>
-            <td>@snip.Title</td>
-            <td>@snip.Code</td>
-            <td>@snip.Link</td>
-            <td><a href="/EditSnippet/@snip.SnippetId">Edit</a></td>
-            <td><a href="/DeleteSnippet/@snip.SnippetId">Delete</a></td>
-
-        </tr>
+        <div>
+            <h3>@snip.Title</h3>
+            <p>@snip.Description</p>
+            <p>@snip.Code</p>
+            <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
+            <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
+        </div>
     }
-</table>
-
+</div>
