@@ -77,6 +77,7 @@
                     <h3>@snip.Title</h3>
                     <p>@snip.Description</p>
                     <p>@snip.Code</p>
+                    <button class="btn button" data-clipboard-text="@snip.Code">copy?</button>
                     <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
                     <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
                 </div>
@@ -92,7 +93,8 @@
                 <div>
                     <h3>@snip.Title</h3>
                     <p>@snip.Description</p>
-                    <p>@snip.Code</p>
+                    <p class="code">@snip.Code</p>
+                    <button class="btn button" data-clipboard-text="@snip.Code">copy?</button>
                     <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
                     <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
                 </div>
