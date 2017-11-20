@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "Log in";
 }
+@{
+    if (TempData.ContainsKey("ErrorMessage"))
+    {
+        <h4>@TempData["ErrorMessage"].ToString()</h4>
+    }
+}
 
 <h2>@ViewData["Title"]</h2>
 <div class="row">
