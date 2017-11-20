@@ -156,6 +156,19 @@ namespace OhSnip.Controllers
 
         }
 
+        [HttpPost]
+        [Route("Search")]
+        public IActionResult Search(string searchString)
+        {
+            ViewBag.searchsnippets = _context
+                .Snippets
+                .Where(item => item.Code.Contains(searchString)
+                    || item.Description.Contains(searchString)
+                    || item.Title.Contains(searchString)
+                    );
+            return View("Dashboard");
+        }
+        
 
 
         public IActionResult Error()
