@@ -55,9 +55,9 @@
 <div id="main" class="main">
     <h2>Welcome!</h2>
 
-    <form asp-controller="Snippet" asp-action="Dashboard" method="post">
+    <form asp-controller="Snippet" asp-action="Search" method="post">
         <div class="input-group col-xs-12 col-md-6">
-            <input type="text" class="form-control" placeholder="Search" />
+            <input type="text" class="form-control" name="searchString" placeholder="Search" />
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-default">
                     <i class="glyphicon glyphicon-search"></i> 
@@ -67,18 +67,35 @@
     </form>
     <a class="button" type="button" href="/AddSnippet">Add New</a>
 
-    @{    
-        foreach(var snip in @ViewBag.allsnippets)
+    @if (ViewBag.allsnippets != null)
+    {
+        foreach (var snip in @ViewBag.allsnippets)
         {
-            if(snip.ApplicationUserId == UserManager.GetUserId(User))
+            if (snip.ApplicationUserId == UserManager.GetUserId(User))
             {
-                    <div>
-                        <h3>@snip.Title</h3>
-                        <p>@snip.Description</p>
-                        <p>@snip.Code</p>
-                        <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
-                        <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
-                    </div>
+                <div>
+                    <h3>@snip.Title</h3>
+                    <p>@snip.Description</p>
+                    <p>@snip.Code</p>
+                    <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
+                    <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
+                </div>
+            }
+        }
+    }
+    else if (ViewBag.searchsnippets != null)
+    {
+        foreach (var snip in ViewBag.searchsnippets)
+        {
+            if (snip.ApplicationUserId == UserManager.GetUserId(User))
+            {
+                <div>
+                    <h3>@snip.Title</h3>
+                    <p>@snip.Description</p>
+                    <p>@snip.Code</p>
+                    <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
+                    <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
+                </div>
             }
         }
     }
