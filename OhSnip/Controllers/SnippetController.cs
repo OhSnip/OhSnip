@@ -92,20 +92,7 @@ namespace OhSnip.Controllers
 
             }
             return View("AddSnippet", snip);
-        }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("SnippetId,Title,Description,Language,Code,Link,ApplicationUserId")] Snippet snippet)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(snippet);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Dashboard));
-        //    }
-        //    return View("AddSnippet", snippet);
-        //}
-                   
+        }         
 
     [HttpGet]
         [Route("EditSnippet/{id}")]
@@ -124,16 +111,22 @@ namespace OhSnip.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("SnippetId,Title,Description,Language,Code,Link,ApplicationUserId")] Snippet snippet)
+        public async Task<IActionResult> Edit(DetailViewModel snip, int id)
         {
             if (ModelState.IsValid)
             {
-                _context.Snippets.Update(snippet);
+                var sniptoupdate = await _context.Snippets.FirstOrDefaultAsync(s => s.SnippetId == id);
+                sniptoupdate.Title = snip.Title;
+                sniptoupdate.Description = snip.Description;
+                sniptoupdate.Language = snip.Language;
+                sniptoupdate.Code = snip.Code;
+                sniptoupdate.Link = snip.Link;
+                _context.Snippets.Update(sniptoupdate);
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Dashboard));
             }
-            return View(snippet);
+            return View(snip);
         }
 
         [HttpGet]
