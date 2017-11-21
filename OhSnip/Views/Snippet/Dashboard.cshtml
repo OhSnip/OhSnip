@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using OhSnip.Models
 
+@model OhSnip.Models.SnippetViewModels.DashboardViewModel
+
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
@@ -68,43 +70,19 @@
     </form>
     <a class="button" type="button" href="/AddSnippet">New Snippet</a>
 
-    @if (ViewBag.allsnippets != null)
+    @foreach (var snip in Model.Snippets)
     {
-        foreach (var snip in @ViewBag.allsnippets)
-        {
-            if (snip.ApplicationUserId == UserManager.GetUserId(User))
-            {
-                <div class="snippet @snip.Language">
-                    <h3 class="clicker">@snip.Title</h3>
-                    <p>@snip.Description</p>
-                    <div class="hidetoggle">
-                        <p class="code">@snip.Code</p>
-                        <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
-                        <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
-                    </div>
-                </div>
-            }
-        }
+        <div class="snippet @snip.Language">
+            <h3 class="clicker">@snip.Title</h3>
+            <p>@snip.Description</p>
+            <div class="hidetoggle">
+                <p class="code">@snip.Code</p>
+                <button class="btn button" data-clipboard-text="@snip.Code">copy?</button>
+                <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
+                <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
+            </div>
+        </div>
     }
-    else if (ViewBag.searchsnippets != null)
-    {
-        foreach (var snip in ViewBag.searchsnippets)
-        {
-            if (snip.ApplicationUserId == UserManager.GetUserId(User))
-            {
-                <div class="snippet @snip.Language">
-                    <h3 class="clicker">@snip.Title</h3>
-                    <p>@snip.Description</p>
-                    <div class="hidetoggle">
-                        <p class="code">@snip.Code</p>
-                        <a class="button" type="button" href="/EditSnippet/@snip.SnippetId">Edit</a>
-                        <a type="button" class="button" href="/DeleteSnippet/@snip.SnippetId">Delete</a>
-                    </div>
-                </div>
-            }
-        }
-    }
-
 </div>
 
 <script>
